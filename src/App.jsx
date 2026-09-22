@@ -6,7 +6,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [showRequestForm, setShowRequestForm] = useState(false)
   const [projectName, setProjectName] = useState("")
-
+  const [projectType, setProjectType] = useState("")
 
   function login() {
     console.log("Email:", email)
@@ -43,7 +43,10 @@ function App() {
 
               <label>Project Type</label>
 
-              <select>
+              <select
+                value={projectType}
+                onChange={(e) => setProjectType(e.target.value)}
+              >
                 <option value= "">Select project type</option>
                 <option value="Bridge">Bridge</option>
                 <option value="Road">Road</option>
@@ -56,6 +59,7 @@ function App() {
                 <option value ="Community Sports">Sports</option>
                 <option value ="Waste removal">Waste removal</option>
               </select>
+              <p>Project Type: {projectType}</p>
             </div>
         )
         }
