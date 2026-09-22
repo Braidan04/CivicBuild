@@ -37,7 +37,25 @@ function App() {
              placeholder="Enter project name"
              value={projectName}
              onChange={(e) => setProjectName(e.target.value)}/>
-              <p>Project Name: {projectName}</p>
+
+
+              {/*<p>Project Name: {projectName}</p>*/}
+
+              <label>Project Type</label>
+
+              <select>
+                <option value= "">Select project type</option>
+                <option value="Bridge">Bridge</option>
+                <option value="Road">Road</option>
+                <option value="School">School</option>
+                <option value="Clinic">Clinic</option>
+                <option value="Water">Water Infrastructure</option>
+                <option value="Electricity">Electricity</option>
+                <option value="Community Hall">Community Hall</option>
+                <option value="Community Library">Community Library</option>
+                <option value ="Community Sports">Sports</option>
+                <option value ="Waste removal">Waste removal</option>
+              </select>
             </div>
         )
         }
