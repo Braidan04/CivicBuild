@@ -1,20 +1,28 @@
-
 import { useState } from 'react'
 import './government.css'
 
 function GovernmentLogin({ onLogin }) {
+  const [governmentId, setGovernmentId] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   function handleLogin(e) {
     e.preventDefault()
 
-    if (email === '' || password === '') {
-      alert('Please enter your government email and password.')
+    if (
+      governmentId.trim() === '' ||
+      email.trim() === '' ||
+      password === ''
+    ) {
+      alert('Please enter your Government ID, email and password.')
       return
     }
 
-    onLogin()
+    onLogin({
+      governmentId: governmentId.trim().toUpperCase(),
+      email: email.trim().toLowerCase(),
+      password: password
+    })
   }
 
   return (
@@ -30,15 +38,26 @@ function GovernmentLogin({ onLogin }) {
         <h2>Government Official Login</h2>
 
         <p className="government-login-description">
-          Sign in to review and manage community infrastructure projects.
+          Sign in using your Government ID, work email and password.
         </p>
 
         <form onSubmit={handleLogin}>
           <div className="government-form-group">
-            <label>Government Email Address</label>
+            <label>Government ID</label>
+            <input
+              type="text"
+              placeholder="Example: GOV-7K4P92MX"
+              value={governmentId}
+              onChange={(e) => setGovernmentId(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="government-form-group">
+            <label>Government Work Email</label>
             <input
               type="email"
-              placeholder="Enter your official email"
+              placeholder="Enter your registered email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required

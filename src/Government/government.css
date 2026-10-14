@@ -381,3 +381,17 @@
     flex-direction: column;
   }
 }
+
+.government-id-display {
+  margin: 20px 0;
+  padding: 18px;
+  border: 1px solid #10b981;
+  border-radius: 10px;
+  background: #101b15;
+  color: #6ee7b7;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}

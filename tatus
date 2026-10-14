@@ -1,0 +1,9 @@
+ src/App.jsx                            | 803 [32m++++++++++++++++++++++++[m[31m---------[m
+ src/Government/GovernmentDashboard.jsx | 139 [32m++++++[m
+ src/Government/GovernmentLogin.jsx     |  68 [32m+++[m
+ src/Government/government.css          | 383 [32m++++++++++++++++[m
+ src/Government/governmentPortal.jsx    |  97 [32m++++[m
+ src/RoleSelection.css                  | 256 [32m+++++++++++[m
+ src/RoleSelection.jsx                  | 132 [32m++++++[m
+ src/index.css                          | 634 [32m++++++++++++++++++++++[m[31m----[m
+ 8 files changed, 2205 insertions(+), 307 deletions(-)

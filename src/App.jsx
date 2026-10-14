@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './index.css'
 import GovernmentLogin from './government/GovernmentLogin'
 import GovernmentDashboard from './government/GovernmentDashboard'
@@ -35,6 +35,22 @@ function App() {
 
   const [urgencyLevel, setUrgencyLevel] = useState('')
   const [communityBenefit, setCommunityBenefit] = useState('')
+  const [projectProposals, setProjectProposals] = useState(() => {
+  const savedProposals = localStorage.getItem('civicBuildProposals')
+
+  if (savedProposals) {
+    return JSON.parse(savedProposals)
+  }
+
+  return []
+})
+
+useEffect(() => {
+  localStorage.setItem(
+    'civicBuildProposals',
+    JSON.stringify(projectProposals)
+  )
+}, [projectProposals])
 
   const [communityRepresentativeName, setCommunityRepresentativeName] =
     useState('')
@@ -50,7 +66,12 @@ if (currentPath === '/') {
 }
 
 if (currentPath === '/government') {
-  return <GovernmentPortal />
+  return (
+    <GovernmentPortal
+      projectProposals={projectProposals}
+      setProjectProposals={setProjectProposals}
+    />
+  )
 }
 
   function login() {
@@ -71,32 +92,76 @@ if (currentPath === '/government') {
     setRegistered(true)
   }
 
-  function submitProject(e) {
-    e.preventDefault()
+  
+function submitProject(e) {
+  e.preventDefault()
 
-    if (
-      projectName === '' ||
-      projectType === '' ||
-      province === '' ||
-      projectLocation === '' ||
-      municipality === '' ||
-      communityArea === '' ||
-      projectDescription === '' ||
-      urgencyLevel === '' ||
-      communityBenefit === '' ||
-      communityRepresentativeName === '' ||
-      communityRepresentativePhone === ''
-    ) {
-      alert('Please complete all required fields.')
-      return
-    }
-
-    alert(
-      'Project proposal submitted. Government review and permanent storage are not connected yet.'
-    )
-
-    setShowRequestForm(false)
+  if (
+    projectName === '' ||
+    projectType === '' ||
+    province === '' ||
+    projectLocation === '' ||
+    municipality === '' ||
+    communityArea === '' ||
+    projectDescription === '' ||
+    urgencyLevel === '' ||
+    communityBenefit === '' ||
+    communityRepresentativeName === '' ||
+    communityRepresentativePhone === ''
+  ) {
+    alert('Please complete all required fields.')
+    return
   }
+
+  const newProposal = {
+    id: Date.now(),
+    projectName: projectName,
+    projectType: projectType,
+    province: province,
+    projectLocation: projectLocation,
+    municipality: municipality,
+    ward: ward,
+    communityArea: communityArea,
+    projectDescription: projectDescription,
+    urgencyLevel: urgencyLevel,
+    communityBenefit: communityBenefit,
+    communityRepresentativeName: communityRepresentativeName,
+    communityRepresentativePhone: communityRepresentativePhone,
+    communityRepresentativeId: communityRepresentativeId,
+    projectPhotos: projectPhotos,
+    communityProposal: communityProposal,
+    projectDocument: projectDocument,
+    status: 'Pending Review',
+    submittedAt: new Date().toLocaleString()
+  }
+
+  setProjectProposals((previousProposals) => [
+    ...previousProposals,
+    newProposal
+  ])
+
+  alert('Project proposal submitted successfully. It is awaiting government review.')
+
+  setShowRequestForm(false)
+
+  setProjectName('')
+  setProjectType('')
+  setProvince('')
+  setProjectLocation('')
+  setMunicipality('')
+  setWard('')
+  setCommunityArea('')
+  setProjectDescription('')
+  setProjectPhotos([])
+  setCommunityProposal(null)
+  setProjectDocument(null)
+  setUrgencyLevel('')
+  setCommunityBenefit('')
+  setCommunityRepresentativeName('')
+  setCommunityRepresentativePhone('')
+  setCommunityRepresentativeId('')
+}
+
 
   // Government dashboard
   if (governmentLoggedIn) {

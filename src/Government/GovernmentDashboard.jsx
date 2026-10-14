@@ -1,7 +1,21 @@
 
 import './government.css'
 
-function GovernmentDashboard({ onLogout }) {
+function GovernmentDashboard({ onLogout,
+  projectProposals = [],
+  setProjectProposals
+}) {
+    
+const totalProposals = projectProposals.length
+
+const pendingProposals = projectProposals.filter(
+  (proposal) => proposal.status === 'Pending Review'
+).length
+
+const approvedProjects = projectProposals.filter(
+  (proposal) => proposal.status === 'Approved'
+).length
+
   return (
     <div className="government-dashboard-page">
       <header className="government-dashboard-header">
@@ -45,19 +59,19 @@ function GovernmentDashboard({ onLogout }) {
         <section className="government-statistics">
           <div className="government-stat-card">
             <span>Proposals Received</span>
-            <strong>0</strong>
+            <strong>{totalProposals}</strong>
             <p>Total community submissions</p>
           </div>
 
           <div className="government-stat-card">
             <span>Awaiting Review</span>
-            <strong>0</strong>
+            <strong>pendingProposals</strong>
             <p>Proposals requiring a decision</p>
           </div>
 
           <div className="government-stat-card">
             <span>Approved Projects</span>
-            <strong>0</strong>
+            <strong>approvedProjects</strong>
             <p>Projects approved by government</p>
           </div>
 
@@ -68,33 +82,110 @@ function GovernmentDashboard({ onLogout }) {
           </div>
         </section>
 
-        <section className="government-dashboard-panel">
-          <div className="government-panel-heading">
-            <div>
-              <h3>Community Project Proposals</h3>
-              <p>
-                Review submissions received from community members.
-              </p>
+        
+<section className="government-dashboard-panel">
+  <div className="government-panel-heading">
+    <div>
+      <h3>Community Project Proposals</h3>
+      <p>
+        Review submissions received from community members.
+      </p>
+    </div>
+
+    <span className="government-count-badge">
+      {projectProposals.length} proposals
+    </span>
+  </div>
+
+  {projectProposals.length === 0 ? (
+    <div className="government-empty-state">
+      <div className="government-empty-icon">📋</div>
+
+      <h4>No Project Proposals Yet</h4>
+
+      <p>
+        Community project submissions will appear here once
+        proposals have been submitted.
+      </p>
+    </div>
+  ) : (
+    <div className="government-proposal-list">
+      {projectProposals.map((proposal) => (
+        <div className="government-responsibility-card" key={proposal.id}>
+          <h4>{proposal.projectName}</h4>
+
+          <p>
+            <strong>Type:</strong> {proposal.projectType}
+          </p>
+
+          <p>
+            <strong>Location:</strong> {proposal.communityArea},{' '}
+            {proposal.municipality}, {proposal.province}
+          </p>
+
+          <p>
+            <strong>Urgency:</strong> {proposal.urgencyLevel}
+          </p>
+
+          <p>
+            <strong>Description:</strong> {proposal.projectDescription}
+          </p>
+
+          <p>
+            <strong>Community benefit:</strong> {proposal.communityBenefit}
+          </p>
+
+          <p>
+            <strong>Representative:</strong>{' '}
+            {proposal.communityRepresentativeName}
+          </p>
+
+          <p>
+            <strong>Status:</strong> {proposal.status}
+          </p>
+
+          {proposal.status === 'Pending Review' && (
+            <div className="button-row">
+              <button
+                type="button"
+                className="primary-button"
+                onClick={() => {
+                  setProjectProposals((previousProposals) =>
+                    previousProposals.map((item) =>
+                      item.id === proposal.id
+                        ? { ...item, status: 'Approved' }
+                        : item
+                    )
+                  )
+                }}
+              >
+                Approve
+              </button>
+
+              <button
+                type="button"
+                className="secondary-button"
+                onClick={() => {
+                  setProjectProposals((previousProposals) =>
+                    previousProposals.map((item) =>
+                      item.id === proposal.id
+                        ? { ...item, status: 'Rejected' }
+                        : item
+                    )
+                  )
+                }}
+              >
+                Reject
+              </button>
             </div>
+          )}
+        </div>
+      ))}
+    </div>
+  )}
+</section>
 
-            <span className="government-count-badge">
-              0 proposals
-            </span>
-          </div>
-
-          <div className="government-empty-state">
-            <div className="government-empty-icon">📋</div>
-
-            <h4>No Project Proposals Yet</h4>
-
-            <p>
-              Community project submissions will appear here once
-              the Community and Government sections are connected.
-            </p>
-          </div>
-        </section>
-
-        <section className="government-dashboard-panel">
+<section className="government-dashboard-panel">
           <h3>Government Responsibilities</h3>
 
           <div className="government-responsibility-grid">
