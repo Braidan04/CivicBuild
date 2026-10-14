@@ -1,0 +1,256 @@
+
+.role-selection-page {
+  min-height: 100vh;
+  background: #f4f7fb;
+  color: #172338;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.role-header {
+  min-height: 90px;
+  padding: 18px 7%;
+  background: #0b172a;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.role-brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.role-brand-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #16a34a;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.role-brand h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.role-brand p {
+  margin: 5px 0 0;
+  color: #bdc9d8;
+  font-size: 13px;
+}
+
+.role-header-label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #cbd5e1;
+}
+
+.role-main {
+  width: min(1080px, 88%);
+  margin: 0 auto;
+  padding: 58px 0 45px;
+}
+
+.role-intro {
+  max-width: 720px;
+  margin: 0 auto 35px;
+  text-align: center;
+}
+
+.role-eyebrow {
+  color: #15803d;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.role-intro h2 {
+  margin: 15px 0;
+  font-size: clamp(30px, 4vw, 42px);
+  letter-spacing: -1px;
+}
+
+.role-intro > p {
+  color: #637086;
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0 auto;
+}
+
+.role-intro h3 {
+  margin: 30px 0 0;
+  font-size: 18px;
+}
+
+.role-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.role-card {
+  min-height: 220px;
+  padding: 25px;
+  text-align: left;
+  font: inherit;
+  color: #172338;
+  background: white;
+  border: 1px solid #e1e7ef;
+  border-radius: 16px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.role-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(18, 37, 63, 0.09);
+  border-color: #94a3b8;
+}
+
+.role-card:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 4px;
+}
+
+.role-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.role-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.role-card-arrow {
+  color: #64748b;
+  font-size: 23px;
+}
+
+.role-card h3 {
+  margin: 22px 0 9px;
+  font-size: 20px;
+}
+
+.role-card > p {
+  min-height: 44px;
+  margin: 0;
+  color: #647086;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.role-card-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.community .role-card-icon {
+  color: #0369a1;
+  background: #e0f2fe;
+}
+
+.community .role-card-link {
+  color: #0369a1;
+}
+
+.government .role-card-icon {
+  color: #15803d;
+  background: #dcfce7;
+}
+
+.government .role-card-link {
+  color: #15803d;
+}
+
+.tender .role-card-icon {
+  color: #7e22ce;
+  background: #f3e8ff;
+}
+
+.tender .role-card-link {
+  color: #7e22ce;
+}
+
+.special-unit .role-card-icon {
+  color: #b91c1c;
+  background: #fee2e2;
+}
+
+.special-unit .role-card-link {
+  color: #b91c1c;
+}
+
+.role-security-note {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  max-width: 650px;
+  margin: 28px auto 0;
+  padding: 15px 18px;
+  border: 1px solid #e1e7ef;
+  border-radius: 12px;
+  background: #edf2f8;
+}
+
+.role-security-note p {
+  margin: 0;
+  color: #526176;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.role-footer {
+  padding: 22px;
+  text-align: center;
+  border-top: 1px solid #e1e7ef;
+}
+
+.role-footer p {
+  margin: 0;
+  color: #647086;
+  font-size: 12px;
+}
+
+@media (max-width: 650px) {
+  .role-header {
+    padding: 16px 5%;
+  }
+
+  .role-header-label {
+    display: none;
+  }
+
+  .role-main {
+    width: 90%;
+    padding-top: 38px;
+  }
+
+  .role-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .role-card {
+    min-height: 200px;
+  }
+}
