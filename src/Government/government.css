@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   padding: 24px;
-  background: #f1f5f9;
+  background: whitesmoke;
   font-family: Arial, sans-serif;
 }
 
@@ -31,7 +31,7 @@
 
 .government-brand h1 {
   margin: 0;
-  color: #12315a;
+  color: #5c6dce;
   font-size: 28px;
 }
 
@@ -42,7 +42,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  background: #12315a;
+  background: #4167ce;
   color: #ffffff;
   font-weight: bold;
   font-size: 18px;
@@ -161,6 +161,7 @@
   margin: 0;
   color: #12315a;
   font-size: 24px;
+  font-weight: 900;
 }
 
 .government-dashboard-brand p {
@@ -394,4 +395,60 @@
   letter-spacing: 2px;
   text-align: center;
   overflow-wrap: anywhere;
+}
+.government-official-welcome {
+  font-weight: 700;
+  font-size: 18px;
+  margin-top: 12px;
+}
+
+.government-official-department {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.government-dashboard-brand h1 {
+  font-weight: 700;
+}
+
+.government-dashboard-brand p {
+  line-height: 1.5;
+}
+
+.government-dashboard-brand .government-official-welcome {
+  font-weight: 800 !important;
+  font-size: 20px !important;
+  color: #111827;
+}
+
+.government-dashboard-brand .government-official-department {
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  color: #111827;
+}
+
+.government-dashboard-brand h1 {
+  font-weight: 800 !important;
+}
+
+
+.government-official-welcome {
+  font-size: 20px;
+  font-weight: 400;
+  color: #111827;
+  margin-top: 12px;
+}
+
+.government-official-welcome strong {
+  font-weight: 700;
+}
+
+.government-official-department {
+  font-size: 16px;
+  font-weight: 400;
+  color: #111827;
+}
+
+.government-official-department strong {
+  font-weight: 700;
 }

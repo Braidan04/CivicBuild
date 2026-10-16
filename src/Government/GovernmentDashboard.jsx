@@ -1,9 +1,11 @@
 
 import './government.css'
 
-function GovernmentDashboard({ onLogout,
+function GovernmentDashboard({ 
   projectProposals = [],
-  setProjectProposals
+  setProjectProposals,
+  onLogout,
+  official
 }) {
     
 const totalProposals = projectProposals.length
@@ -20,13 +22,24 @@ const approvedProjects = projectProposals.filter(
     <div className="government-dashboard-page">
       <header className="government-dashboard-header">
         <div className="government-dashboard-brand">
-          <div className="government-brand-icon">CB</div>
+        <div className="government-brand-icon">CB</div>
+  <div>
+    <h1>CivicBuild </h1>
+    <p>Government Administration Portal</p>
 
-          <div>
-            <h1>CivicBuild</h1>
-            <p>Government Administration Portal</p>
-          </div>
-        </div>
+    
+<p className="government-official-welcome">
+  <strong>Welcome back:</strong>{' '}
+  {official?.fullName || 'Government Official'}
+</p>
+
+<p className="government-official-department">
+  <strong>Department:</strong>{' '}
+  {official?.department || 'Not specified'}
+</p>
+
+  </div>
+</div>
 
         <div className="government-header-actions">
           <span className="government-role-badge">
@@ -65,13 +78,13 @@ const approvedProjects = projectProposals.filter(
 
           <div className="government-stat-card">
             <span>Awaiting Review</span>
-            <strong>pendingProposals</strong>
+            <strong>{pendingProposals}</strong>
             <p>Proposals requiring a decision</p>
           </div>
 
           <div className="government-stat-card">
             <span>Approved Projects</span>
-            <strong>approvedProjects</strong>
+            <strong>{approvedProjects}</strong>
             <p>Projects approved by government</p>
           </div>
 
@@ -83,7 +96,7 @@ const approvedProjects = projectProposals.filter(
         </section>
 
         
-<section className="government-dashboard-panel">
+<section id= "community-proposals" className="government-dashboard-panel">
   <div className="government-panel-heading">
     <div>
       <h3>Community Project Proposals</h3>
@@ -185,7 +198,7 @@ const approvedProjects = projectProposals.filter(
   )}
 </section>
 
-<section className="government-dashboard-panel">
+<section id="community-proposals" className="government-dashboard-panel">
           <h3>Government Responsibilities</h3>
 
           <div className="government-responsibility-grid">
@@ -195,6 +208,15 @@ const approvedProjects = projectProposals.filter(
                 Examine project needs, locations, supporting documents,
                 and expected community benefits.
               </p>
+
+              <button type="button" className="primary-button" onClick={() => {
+                document.getElementById('community-proposals')
+                ?.scrollIntoView({behavior: 'smooth'})
+              }
+              }
+              >
+                Review Community Proposals
+              </button>
             </div>
 
             <div className="government-responsibility-card">

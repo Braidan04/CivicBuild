@@ -1,8 +1,6 @@
 
 import { useEffect, useState } from 'react'
 import './index.css'
-import GovernmentLogin from './government/GovernmentLogin'
-import GovernmentDashboard from './government/GovernmentDashboard'
 import GovernmentPortal from './government/GovernmentPortal'
 import RoleSelection from './RoleSelection'
 
