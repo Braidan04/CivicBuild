@@ -224,7 +224,7 @@
 
 .government-statistics {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 18px;
   margin-bottom: 30px;
 }
@@ -452,3 +452,97 @@
 .government-official-department strong {
   font-weight: 700;
 }
+
+
+/* Government Site Inspection */
+
+.government-inspection-section {
+  margin-top: 20px;
+  padding: 20px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+}
+
+.government-inspection-section h4 {
+  margin: 0 0 18px;
+  color: #12315a;
+  font-size: 17px;
+}
+
+.government-form-group input,
+.government-form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #172b4d;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.government-form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.government-form-group input:focus,
+.government-form-group textarea:focus {
+  outline: none;
+  border-color: #2563a6;
+  box-shadow: 0 0 0 3px rgba(37, 99, 166, 0.12);
+}
+
+
+/* Government Proposal Cards */
+
+.government-proposal-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.government-proposal-card {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.government-proposal-card .government-inspection-section {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
+.government-proposal-card .government-inspection-section .government-form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.government-proposal-card .government-inspection-section input,
+.government-proposal-card .government-inspection-section textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.government-proposal-card .government-inspection-section textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+@media (max-width: 600px) {
+  .government-proposal-card {
+    padding: 16px;
+  }
+
+  .government-proposal-card .government-inspection-section {
+    padding: 14px;
+  }
+}
+

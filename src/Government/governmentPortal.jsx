@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import GovernmentLogin from './GovernmentLogin'
+import GovernmentDashboard from './GovernmentDashboard'
 import './government.css'
 
 function GovernmentPortal({ projectProposals, setProjectProposals }) {

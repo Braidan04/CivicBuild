@@ -18,6 +18,10 @@ const approvedProjects = projectProposals.filter(
   (proposal) => proposal.status === 'Approved'
 ).length
 
+const rejectedProjects = projectProposals.filter(
+  (proposal) => proposal.status === 'Rejected'
+).length
+
   return (
     <div className="government-dashboard-page">
       <header className="government-dashboard-header">
@@ -89,6 +93,12 @@ const approvedProjects = projectProposals.filter(
           </div>
 
           <div className="government-stat-card">
+            <span>Rejected Projects</span>
+            <strong style={{ color: 'red' }}>{rejectedProjects}</strong>
+            <p>Proposals rejected by government</p>
+            </div>
+
+          <div className="government-stat-card">
             <span>Approved Budget</span>
             <strong>R0.00</strong>
             <p>Total approved project budget</p>
@@ -124,7 +134,7 @@ const approvedProjects = projectProposals.filter(
   ) : (
     <div className="government-proposal-list">
       {projectProposals.map((proposal) => (
-        <div className="government-responsibility-card" key={proposal.id}>
+        <div className="government-responsibility-card government-proposal-card" key={proposal.id}>
           <h4>{proposal.projectName}</h4>
 
           <p>
@@ -157,48 +167,175 @@ const approvedProjects = projectProposals.filter(
             <strong>Status:</strong> {proposal.status}
           </p>
 
-          {proposal.status === 'Pending Review' && (
-            <div className="button-row">
-              <button
-                type="button"
-                className="primary-button"
-                onClick={() => {
-                  setProjectProposals((previousProposals) =>
-                    previousProposals.map((item) =>
-                      item.id === proposal.id
-                        ? { ...item, status: 'Approved' }
-                        : item
-                    )
-                  )
-                }}
-              >
-                Approve
-              </button>
+{proposal.decisionBy && (
+  <p>
+    <strong>Decision made by:</strong> {proposal.decisionBy}
+  </p>
+)}
 
-              <button
-                type="button"
-                className="secondary-button"
-                onClick={() => {
-                  setProjectProposals((previousProposals) =>
-                    previousProposals.map((item) =>
-                      item.id === proposal.id
-                        ? { ...item, status: 'Rejected' }
-                        : item
-                    )
-                  )
-                }}
-              >
-                Reject
-              </button>
-            </div>
-          )}
+{proposal.decisionDate && (
+  <p>
+    <strong>Decision date:</strong>{' '}
+    {new Date(proposal.decisionDate).toLocaleString()}
+  </p>
+)}
+
+ 
+{proposal.status !== 'Rejected' && (
+  <div className="government-inspection-section">
+    {!proposal.inspectionSaved ? (
+      <>
+        <h4>Arrange Site Inspection</h4>
+
+        <div className="government-form-group">
+          <label>Inspection Date</label>
+          <input
+            type="date"
+            value={proposal.inspectionDate || ''}
+            onChange={(e) => {
+              const inspectionDate = e.target.value
+
+              setProjectProposals((previousProposals) =>
+                previousProposals.map((item) =>
+                  item.id === proposal.id
+                    ? { ...item, inspectionDate }
+                    : item
+                )
+              )
+            }}
+          />
         </div>
+
+        <div className="government-form-group">
+          <label>Assigned Inspection Team</label>
+          <input
+            type="text"
+            placeholder="Enter team or department"
+            value={proposal.inspectionTeam || ''}
+            onChange={(e) => {
+              const inspectionTeam = e.target.value
+
+              setProjectProposals((previousProposals) =>
+                previousProposals.map((item) =>
+                  item.id === proposal.id
+                    ? { ...item, inspectionTeam }
+                    : item
+                )
+              )
+            }}
+          />
+        </div>
+
+        <div className="government-form-group">
+          <label>Inspection Notes</label>
+          <textarea
+            placeholder="Explain what needs to be inspected"
+            value={proposal.inspectionNotes || ''}
+            onChange={(e) => {
+              const inspectionNotes = e.target.value
+
+              setProjectProposals((previousProposals) =>
+                previousProposals.map((item) =>
+                  item.id === proposal.id
+                    ? { ...item, inspectionNotes }
+                    : item
+                )
+              )
+            }}
+          />
+        </div>
+
+        <button
+          type="button"
+          className="primary-button"
+          onClick={() => {
+            if (!proposal.inspectionDate) {
+              alert('Please select an inspection date.')
+              return
+            }
+
+            setProjectProposals((previousProposals) =>
+              previousProposals.map((item) =>
+                item.id === proposal.id
+                  ? {
+                      ...item,
+                      inspectionSaved: true,
+                      inspectionSavedDate: new Date().toISOString()
+                    }
+                  : item
+              )
+            )
+          }}
+        >
+          Save Inspection Details
+        </button>
+      </>
+    ) : (
+      <p>
+        <strong>Inspection Scheduled</strong>
+        <br />
+        Date: {new Date(
+          proposal.inspectionDate + 'T00:00:00'
+        ).toLocaleDateString()}
+      </p>
+    )}
+  </div>
+)}
+
+
+{proposal.status === 'Pending Review' && (
+  <div className="button-row">
+    <button
+      type="button"
+      className="primary-button"
+      onClick={() => {
+        setProjectProposals((previousProposals) =>
+          previousProposals.map((item) =>
+            item.id === proposal.id
+              ? {
+                  ...item,
+                  status: 'Approved',
+                  decisionBy: official?.fullName || 'Government Official',
+                  decisionDate: new Date().toISOString()
+                }
+              : item
+          )
+        )
+      }}
+    >
+      Approve
+    </button>
+
+    <button
+      type="button"
+      className="secondary-button"
+      onClick={() => {
+        setProjectProposals((previousProposals) =>
+          previousProposals.map((item) =>
+            item.id === proposal.id
+              ? {
+                  ...item,
+                  status: 'Rejected',
+                  decisionBy: official?.fullName || 'Government Official',
+                  decisionDate: new Date().toISOString()
+                }
+              : item
+          )
+        )
+      }}
+    >
+      Reject
+    </button>
+  </div>
+      )}
+
+      </div>
       ))}
     </div>
   )}
 </section>
 
-<section id="community-proposals" className="government-dashboard-panel">
+<section className="government-dashboard-panel">
           <h3>Government Responsibilities</h3>
 
           <div className="government-responsibility-grid">
